@@ -7,21 +7,21 @@ const results = [];
 
 let ignore = 1;
 let songsPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/songlist.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/songlist.csv';
 let usersPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/userlist.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/userlist.csv';
 let playlistPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/playlistlist.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/playlistlist.csv';
 let albumPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/albumlist.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/albumlist.csv';
 let albumSongIncludedPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/album_song_included.csv';
+  '//Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/album_song_included.csv';
 let playlistSongIncludedPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/playlist_song_included.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/playlist_song_included.csv';
 let songUserLikePath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/song_user_likes.csv';
+  '//Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/song_user_likes.csv';
 let songUserRepostPath =
-  '/Users/Nick/Repos/HackReactor/5cloud/5cloud/sidebarComponent/database/seedData/song_user_reposts.csv';
+  '/Users/matthiasfore/Documents/Coding/HR123/20kWave/5cloud/sidebarComponent/database/seedData/song_user_reposts.csv';
 
 let seedSongs = function() {
   fs.readFile(songsPath, (err, data) => {

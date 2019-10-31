@@ -8,7 +8,7 @@ const PORT = 5000;
 
 app.use(express.json());
 
-app.use('/:songid', express.static(path.join(__dirname, '../public/dist')));
+app.use('/songs/:id', express.static(path.join(__dirname, '../public')));
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:4000'); // update to match the domain you will make the request from
@@ -19,32 +19,32 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/currentSong/:songid', (req, res) => {
+app.get('/currentSong/songs/:id', (req, res) => {
   console.log('being hit with GET req for current song info');
   db.getCurrentSong(req, res);
 });
 
-app.get('/relatedtracks/:songid', (req, res) => {
+app.get('/relatedtracks/songs/:id', (req, res) => {
   console.log('being hit with GET req for related tracks');
   db.getRelatedTracks(req, res);
 });
 
-app.get('/userlike/:songid', (req, res) => {
+app.get('/userlike/songs/:id', (req, res) => {
   console.log('being hit with GET req for user likes');
   db.getUsersLiked(req, res);
 });
 
-app.get('/userrepost/:songid', (req, res) => {
+app.get('/userrepost/songs/:id', (req, res) => {
   console.log('being hit with GET req for user reposts');
   db.getUsersRepost(req, res);
 });
 
-app.get('/playlistincluded/:songid', (req, res) => {
+app.get('/playlistincluded/songs/:id', (req, res) => {
   console.log('being hit with GET req for playlists');
   db.getInclusivePlaylists(req, res);
 });
 
-app.get('/albumincluded/:songid', (req, res) => {
+app.get('/albumincluded/songs/:id', (req, res) => {
   console.log('being hit with GET req for albums with song in them');
   db.getInclusiveAlbums(req, res);
 });

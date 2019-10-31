@@ -5,5 +5,5 @@ import 'babel-polyfill';
 
 ReactDOM.render(
   <App currentSong="Song_00001" />,
-  document.getElementById('app')
+  document.getElementById('sidebar')
 );
