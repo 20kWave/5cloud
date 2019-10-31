@@ -113,6 +113,6 @@ class Sidebar extends React.Component {
 export default Sidebar;
 
 ReactDOM.render(
-  <Sidebar currentSong="Song_00001" />,
+  <Sidebar currentSong="1" />,
   document.getElementById('sidebar')
 );
