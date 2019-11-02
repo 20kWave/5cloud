@@ -59,7 +59,7 @@ CREATE TABLE song_user_likes (
   id INT AUTO_INCREMENT NOT NULL,
   user INT NOT NULL,
   song INT NOT NULL,
-  FOREIGN KEY (user) 
+  FOREIGN KEY (user)
     REFERENCES users(id)
     ON DELETE CASCADE,
   FOREIGN KEY (song)
@@ -73,7 +73,7 @@ CREATE TABLE song_user_reposts (
   id INT AUTO_INCREMENT NOT NULL,
   user INT NOT NULL,
   song INT NOT NULL,
-  FOREIGN KEY (user) 
+  FOREIGN KEY (user)
     REFERENCES users(id)
     ON DELETE CASCADE,
   FOREIGN KEY (song)
@@ -87,7 +87,7 @@ CREATE TABLE playlist_song_included (
   id INT AUTO_INCREMENT NOT NULL,
   playlist INT NOT NULL,
   song INT NOT NULL,
-  FOREIGN KEY (playlist) 
+  FOREIGN KEY (playlist)
     REFERENCES playlists(id)
     ON DELETE CASCADE,
   FOREIGN KEY (song)
@@ -101,7 +101,7 @@ CREATE TABLE album_song_included (
   id INT AUTO_INCREMENT NOT NULL,
   album INT NOT NULL,
   song INT NOT NULL,
-  FOREIGN KEY (album) 
+  FOREIGN KEY (album)
     REFERENCES albums(id)
     ON DELETE CASCADE,
   FOREIGN KEY (song)

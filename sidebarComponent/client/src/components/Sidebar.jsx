@@ -5,6 +5,16 @@ import axios from 'axios';
 import style from './Sidebar.css';
 import 'babel-polyfill';
 
+var next = (this.props.currentSong) =>{
+  axios
+  .get(`/currentSong/songs/${this.state.currentSongId}`)
+  .then(song => {
+    this.setState({ currentSong: song.data[0] });
+    console.log(song);
+  });
+}
+
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -75,6 +85,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className={style.container}>
+        <button onClick={next}></button>
         <ItemsContainer
           id="related-tracks"
           type="relatedTracks"
