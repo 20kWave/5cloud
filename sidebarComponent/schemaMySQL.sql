@@ -5,7 +5,6 @@ USE 5cloud;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT NOT NULL,
-  user_id VARCHAR(25),
   avatar VARCHAR(150),
   username VARCHAR(25),
   pro_unlimited BOOLEAN DEFAULT 0,
@@ -18,7 +17,6 @@ CREATE TABLE users (
 
 CREATE TABLE songs (
   id INT AUTO_INCREMENT NOT NULL,
-  song_id VARCHAR(25) NOT NULL,
   song_name VARCHAR(50) NOT NULL,
   artist_name VARCHAR(100) NOT NULL,
   date_posted VARCHAR(25) NOT NULL,
@@ -110,4 +108,3 @@ CREATE TABLE album_song_included (
 
   PRIMARY KEY(id)
 );
-
