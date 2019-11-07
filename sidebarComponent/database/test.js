@@ -3,7 +3,7 @@ var faker = require('faker');
 
 // COUNTS
 var userCount = 100;
-var songsCount = 500;
+var songsCount = 10000000;
 var albumsCount = 10;
 var playlistsCount = 10;
 var followersCount = 0;
@@ -603,7 +603,7 @@ writeUsers(usersStream, 'utf-8',
                 writeFollowers(followerStream, 'utf-8',
                     writeAlbumSongs(album_songStream, 'utf-8',
                         writePlaylistSongs(playlist_songStream, 'utf-8',
-                            writeSongLikes(song_likeStream, 'utf-8',
+                            writeSongLikes(song_likeStream, 'utf-8', 
                                 writeSongReposts(song_repostStream, 'utf-8',
                                     writePlaylistLikes(playlist_likeStream, 'utf-8',
                                         writePlaylistReposts(playlist_repostStream, 'utf-8')))))))))))
