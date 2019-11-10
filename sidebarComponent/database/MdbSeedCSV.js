@@ -1,3 +1,6 @@
-let mongoose = require('mongoose');
-var Schema = require("./MdbSchemaCSV.js");
+const mongoose = require('mongoose');
+let Schema = require('./MdbSchemaCSV.js');
 
+/*
+GOAL: 
+*/
