@@ -5,28 +5,25 @@ const client = new Client({
   host: '127.0.0.1',
   database: 'whoami',
   password: null,
-  port: '5432',
+  port: 5432,
 });
 
 client.connect((err) => {
   if (err) {
     console.log('connection error: ', err.stack);
-  }else {
+  } else {
     console.log('connected to psql');
   }
 });
 
-module.exports = client;
-
-
-// let mysql = require('mysql');
-
-// let connection = mysql.createConnection({
-//   user: 'root',
-//   password: 'password',
-//   database: '5cloud'
-// });
-
-// connection.connect();
-
-// module.exports = connection;
+client.query(
+  `SELECT * FROM songs WHERE id = 1`,
+  (err, song) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(song.rows[0]);
+    }
+    client.end();
+  }
+);

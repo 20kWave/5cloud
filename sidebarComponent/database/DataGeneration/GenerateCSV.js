@@ -2,9 +2,9 @@ const fs = require('fs');
 const faker = require('faker');
 
 // COUNTS
-const userCount = 100;
+const userCount = 10000;
 const songsCount = 10000000;
-const albumsCount = 10;
+const albumsCount = 1000000;
 const playlistsCount = 10;
 let followersCount = 0;
 let album_songsCount = 0;

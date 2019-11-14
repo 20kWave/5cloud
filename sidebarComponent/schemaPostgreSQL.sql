@@ -22,8 +22,8 @@ CREATE TABLE playlists
 (id SERIAL PRIMARY KEY,
 playlist_name VARCHAR(25),
 playlist_art VARCHAR(250),
-created_by INTEGER,
-FOREIGN KEY (created_by) REFERENCES users(id));
+created_by INTEGER
+    REFERENCES users(id));
 
 CREATE TABLE followers
 (followed INTEGER,
@@ -33,9 +33,9 @@ UNIQUE (followed, follower));
 
 CREATE TABLE album_songs
 (album_id INTEGER,
-song_id INTEGER,
-FOREIGN KEY (song_id) REFERENCES songs(id),
-UNIQUE (album_id, song_id));
+song_id INTEGER
+    REFERENCES songs(id),
+    UNIQUE (album_id, song_id));
 
 CREATE TABLE playlist_songs
 (playlist_id INTEGER,
@@ -52,17 +52,14 @@ UNIQUE (song_id, liker));
 CREATE TABLE song_reposts
 (songs INTEGER,
 reposter INTEGER,
-FOREIGN KEY (reposter) REFERENCES users(id),
 UNIQUE (songs, reposter));
 
 CREATE TABLE playlist_likes
 (playlists INTEGER,
 liker INTEGER,
-FOREIGN KEY (liker) REFERENCES users(id),
 UNIQUE (playlists, liker));
 
 CREATE TABLE playlist_reposts
 (playlists INTEGER,
 reposter INTEGER,
-FOREIGN KEY (reposter) REFERENCES users(id),
 UNIQUE (playlists, reposter));

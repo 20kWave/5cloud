@@ -5,14 +5,9 @@ import axios from 'axios';
 import style from './Sidebar.css';
 import 'babel-polyfill';
 
-var next = (this.props.currentSong) =>{
-  axios
-  .get(`/currentSong/songs/${this.state.currentSongId}`)
-  .then(song => {
-    this.setState({ currentSong: song.data[0] });
-    console.log(song);
-  });
-}
+
+const splits = document.URL.split('/');
+const song_id = splits[splits.length - 2];
 
 
 class Sidebar extends React.Component {
@@ -32,61 +27,66 @@ class Sidebar extends React.Component {
   componentDidMount() {
     axios
       .get(`/currentSong/songs/${this.state.currentSongId}`)
-      .then(song => {
-        this.setState({ currentSong: song.data[0] });
+      .then((song) => {
+        // console.log(song.data.rows[0])
+        this.setState({ currentSong: song.data.rows[0] });
+        console.log(song.data.rows[0])
       });
     axios
       .get(`/relatedtracks/songs/${this.state.currentSongId}`)
-      .then(songs => {
+      .then((songs) => {
         this.setState({ relatedTracks: songs.data });
+        console.log(songs.data.rows[0])
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err, 'this is the error from axios req');
       });
 
-    axios
-      .get(`/userlike/songs/${this.state.currentSongId}`)
-      .then(users => {
-        this.setState({ userLikes: users.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .get(`/userlike/songs/${this.state.currentSongId}`)
+    //   .then((users) => {
+    //     this.setState({ userLikes: users.data });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    axios
-      .get(`/userrepost/songs/${this.state.currentSongId}`)
-      .then(users => {
-        this.setState({ userReposts: users.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .get(`/userrepost/songs/${this.state.currentSongId}`)
+    //   .then((users) => {
+    //     this.setState({ userReposts: users.data });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    axios
-      .get(`/playlistincluded/songs/${this.state.currentSongId}`)
-      .then(playlists => {
-        this.setState({ playlistsInclud: playlists.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .get(`/playlistincluded/songs/${this.state.currentSongId}`)
+    //   .then((playlists) => {
+    //     this.setState({ playlistsInclud: playlists.data });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     axios
       .get(`/albumincluded/songs/${this.state.currentSongId}`)
       .then(albums => {
+        console.log(albums.data.rows[0])
         this.setState({ albumsInclud: albums.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
     //api requests to fill the app's state components
+    // console.log(this.state.albumsInclud)
   }
 
   render() {
     return (
       <div className={style.container}>
-        <button onClick={next}></button>
-        <ItemsContainer
+        {/* <button onClick={next}></button> */}
+        {/* <ItemsContainer
           id="related-tracks"
           type="relatedTracks"
           tracks={this.state.relatedTracks}
@@ -95,14 +95,14 @@ class Sidebar extends React.Component {
           id="inclusive-playlists"
           type="playlists"
           playlists={this.state.playlistsInclud}
-        />
+        /> */}
         <ItemsContainer
           id="inclusive-albums"
           type="albums"
           albums={this.state.albumsInclud}
         />
 
-        <InteractionContainer
+        {/* <InteractionContainer
           id="user-likes"
           type="likes"
           users={this.state.userLikes}
@@ -115,7 +115,7 @@ class Sidebar extends React.Component {
           users={this.state.userReposts}
           song={this.state.currentSong}
           className="interaction-container"
-        />
+        /> */}
       </div>
     );
   }
@@ -124,6 +124,6 @@ class Sidebar extends React.Component {
 export default Sidebar;
 
 ReactDOM.render(
-  <Sidebar currentSong="1" />,
+  <Sidebar currentSong={song_id}/>,
   document.getElementById('sidebar')
 );

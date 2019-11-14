@@ -4,12 +4,12 @@ import Album from './Album.jsx';
 import Playlist from './Playlist.jsx';
 import style from './ItemsContainer.css';
 
-let ItemsContainer = props => {
+const ItemsContainer = (props) => {
   if (props.type === 'relatedTracks') {
     if (props.tracks.length) {
       console.log(props.tracks, 'this is props.tracks');
-      let threeTracks = [];
-      for (let i = 1; i < 4; i++) {
+      const threeTracks = [];
+      for (let i = 1; i < 4; i += 1) {
         threeTracks.push(props.tracks[i]);
       }
 
@@ -27,20 +27,18 @@ let ItemsContainer = props => {
           </div>
 
           <div>
-            {threeTracks.map(track => {
-              return <Song track={track} key={track.id} />;
-            })}
+            {threeTracks.map((track) => <Song track={track} key={track.id} />)}
           </div>
         </div>
       );
     } else {
-      return <div></div>;
+      return <div />;
     }
   }
 
   if (props.type === 'playlists') {
     if (props.playlists.length) {
-      let threePlaylists = [];
+      const threePlaylists = [];
       for (let i = 0; i < 3; i++) {
         threePlaylists.push(props.playlists[i]);
       }
@@ -59,21 +57,19 @@ let ItemsContainer = props => {
           </div>
 
           <div>
-            {threePlaylists.map(playlist => {
-              return <Playlist playlist={playlist} key={playlist.id} />;
-            })}
+            {threePlaylists.map((playlist) => <Playlist playlist={playlist} key={playlist.id} />)}
           </div>
         </div>
       );
     } else {
-      return <div></div>;
+      return <div />;
     }
   }
 
   if (props.type === 'albums') {
     if (props.albums.length) {
-      let threeAlbums = [];
-      for (let i = 0; i < 3; i++) {
+      const threeAlbums = [];
+      for (let i = 0; i < props.albums.length && i < 3; i++) {
         threeAlbums.push(props.albums[i]);
       }
 
@@ -91,14 +87,12 @@ let ItemsContainer = props => {
           </div>
 
           <div>
-            {threeAlbums.map(album => {
-              return <Album album={album} key={album.id} />;
-            })}
+            {threeAlbums.map((album) => <Album album={album} key={album.id} />)}
           </div>
         </div>
       );
     } else {
-      return <div></div>;
+      return <div />;
     }
   }
 };

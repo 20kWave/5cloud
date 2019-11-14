@@ -22,24 +22,36 @@ var start = new Date;
 let usersStream = fs.createWriteStream(__dirname + '/MongoData/userList.json');
 function writeUsers(writer, encoding, callback) {
   let i = userCount;
-//   let id = 0;
+  let idU = 0;
   function write() {
     let ok = true;
     do {
       i -= 1;
-      const uString = "{ id: " + i + ", username: "(faker.name.findName()).slice(0,25) + ', location : ' + faker.fake("{{address.state}} {{address.country}}").slice(0,25) + ', avatar: ' + faker.image.avatar() + '\n';
-
-
-
-
-
+      idU += 1;
+      //USER CREATION FORMULA
+      const uString = {
+        _id: idU,
+        username: faker.name.findName().slice(0,25),
+        location : faker.fake({{address.state}} {{address.country}}).slice(0,25),
+        avatar:faker.image.avatar()
+      };
+      //INSERTION
       if (i === 0) {
         writer.write(uString, encoding, callback);
-        // writer.end();
+        TotalTime = new Date() - start;
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        process.stdout.write(`Users ${(idU / userCount * 100).toFixed(0)}%` + ` generated and took ${msToTime(TotalTime)}\n `);
       } else {
-// see if we should continue, or wait
-// don't pass the callback, because we're not done yet.
         ok = writer.write(uString, encoding);
+        const newPercent = (idU / userCount * 100).toFixed(0);
+        if (newPercent !== oldPercent) {
+          var oldPercent = ((idU / userCount * 100).toFixed(0));
+          TotalTime = new Date() - start;
+          process.stdout.clearLine();
+          process.stdout.cursorTo(0);
+          process.stdout.write(`Users ${(idU / userCount * 100).toFixed(0)}%` + ` generated and took ${msToTime(TotalTime)} `);
+        }
       }
     } while (i > 0 && ok);
     if (i > 0) {
@@ -55,12 +67,25 @@ write()
 let songsStream = fs.createWriteStream(__dirname + '/MongoData/songList.json')
 function writeSongs(writer, encoding, callback) {
   let i = songsCount;
-//   let id = 0;
+  let idS = 0;
   function write() {
     let ok = true;
     do {
       i -= 1;
-      const sString = faker.lorem.words().slice(0,25) + ',' + faker.name.findName().slice(0,25) + ',' + "#" + (faker.hacker.adjective()).toUpperCase().slice(0,24) + '\n';
+      idS += 1;
+      //SONG CREATION FORMULA
+      const sString = {
+        _id : idS,
+        name: faker.name.words(),
+        tag: faker.name.findName(),
+        likes: [],
+
+      }
+
+
+
+
+      faker.lorem.words().slice(0,25) + ',' + faker.name.findName().slice(0,25) + ',' + "#" + (faker.hacker.adjective()).toUpperCase().slice(0,24) + '\n';
       if (i === 0) {
         writer.write(sString, encoding, callback);
         // writer.end();
