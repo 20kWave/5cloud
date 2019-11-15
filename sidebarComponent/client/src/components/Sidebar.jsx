@@ -42,32 +42,33 @@ class Sidebar extends React.Component {
         console.log(err, 'this is the error from axios req');
       });
 
-    // axios
-    //   .get(`/userlike/songs/${this.state.currentSongId}`)
-    //   .then((users) => {
-    //     this.setState({ userLikes: users.data });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get(`/userlike/songs/${this.state.currentSongId}`)
+      .then((users) => {
+        this.setState({ userLikes: users.data });
+        console.log(users.data.rows[0])
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    // axios
-    //   .get(`/userrepost/songs/${this.state.currentSongId}`)
-    //   .then((users) => {
-    //     this.setState({ userReposts: users.data });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get(`/userrepost/songs/${this.state.currentSongId}`)
+      .then((users) => {
+        this.setState({ userReposts: users.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    // axios
-    //   .get(`/playlistincluded/songs/${this.state.currentSongId}`)
-    //   .then((playlists) => {
-    //     this.setState({ playlistsInclud: playlists.data });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get(`/playlistincluded/songs/${this.state.currentSongId}`)
+      .then((playlists) => {
+        this.setState({ playlistsInclud: playlists.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     axios
       .get(`/albumincluded/songs/${this.state.currentSongId}`)
@@ -90,19 +91,19 @@ class Sidebar extends React.Component {
           id="related-tracks"
           type="relatedTracks"
           tracks={this.state.relatedTracks}
-        />
-        <ItemsContainer
+        /> */}
+        {/* <ItemsContainer
           id="inclusive-playlists"
           type="playlists"
           playlists={this.state.playlistsInclud}
-        /> */}
+        />
         <ItemsContainer
           id="inclusive-albums"
           type="albums"
           albums={this.state.albumsInclud}
         />
 
-        {/* <InteractionContainer
+        <InteractionContainer
           id="user-likes"
           type="likes"
           users={this.state.userLikes}

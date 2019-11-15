@@ -16,7 +16,7 @@ const getCurrentSong = function (req, res) {
 
 const getRelatedTracks = function (req, res) {
   db.query(
-    `SELECT tag FROM songs WHERE id = ${req.params.id}`,
+    `SELECT * FROM songs WHERE tag = (SELECT tag FROM songs WHERE id = ${req.params.id}) LIMIT 3 OFFSET 2`,
     (err, songs) => {
       if (err) {
         console.log(err);
@@ -28,47 +28,47 @@ const getRelatedTracks = function (req, res) {
   );
 };
 
-// const getUsersLiked = function (req, res) {
-//   db.query(
-//     `SELECT * FROM users WHERE id IN (SELECT liker FROM song_likes WHERE song_id =  1"${req.params.songid}")`,
-//     (err, users) => {
-//       if (err) {
-//         console.log(err);
-//         res.sendStatus(500);
-//       } else {
-//         res.send(users);
-//       }
-//     },
-//   );
-// };
+const getUsersLiked = function (req, res) {
+  db.query(
+    `SELECT * FROM users WHERE id IN (SELECT liker FROM song_likes WHERE song_id =  ${req.params.id})`,
+    (err, users) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send(users);
+      }
+    },
+  );
+};
 
-// const getUsersRepost = function (req, res) {
-//   db.query(
-//     `select * from users where id in (select user from song_user_reposts where song = (select id from songs where song_id = "${req.params.songid}"))`,
-//     (err, users) => {
-//       if (err) {
-//         console.log(err);
-//         res.sendStatus(500);
-//       } else {
-//         res.send(users);
-//       }
-//     },
-//   );
-// };
+const getUsersRepost = function (req, res) {
+  db.query(
+    `SELECT * FROM users WHERE id = (SELECT reposter FROM song_reposts WHERE songs = ${req.params.id})`,
+    (err, users) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send(users);
+      }
+    },
+  );
+};
 
-// const getInclusivePlaylists = function (req, res) {
-//   db.query(
-//     `select * from playlists where id in (select playlist from playlist_song_included where song = (select id from songs where song_id =  "${req.params.songid}"))`,
-//     (err, playlists) => {
-//       if (err) {
-//         console.log(err);
-//         res.sendStatus(500);
-//       } else {
-//         res.send(playlists);
-//       }
-//     },
-//   );
-// };
+const getInclusivePlaylists = function (req, res) {
+  db.query(
+    `SELECT * FROM playlists WHERE id = (SELECT playlist_id FROM playlist_songs WHERE song_id =${req.params.id})`,
+    (err, playlists) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send(playlists);
+      }
+    },
+  );
+};
 
 const getInclusiveAlbums = function (req, res) {
   db.query(
@@ -87,8 +87,8 @@ const getInclusiveAlbums = function (req, res) {
 };
 
 module.exports.getRelatedTracks = getRelatedTracks;
-// module.exports.getUsersLiked = getUsersLiked;
-// module.exports.getUsersRepost = getUsersRepost;
-// module.exports.getInclusivePlaylists = getInclusivePlaylists;
+module.exports.getUsersLiked = getUsersLiked;
+module.exports.getUsersRepost = getUsersRepost;
+module.exports.getInclusivePlaylists = getInclusivePlaylists;
 module.exports.getInclusiveAlbums = getInclusiveAlbums;
 module.exports.getCurrentSong = getCurrentSong;

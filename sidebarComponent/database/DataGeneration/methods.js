@@ -2,7 +2,7 @@ let db = require('./index.js');
 
 let getCurrentSong = function(req, res) {
   db.query(
-    `select * from songs where song_id = "${req.params.songid}"`,
+    `SELECT * FROM songs WHERE id = "${req.params.id}"`,
     (err, song) => {
       if (err) {
         res.sendStatus(500);
@@ -15,7 +15,7 @@ let getCurrentSong = function(req, res) {
 
 let getRelatedTracks = function(req, res) {
   db.query(
-    `select * from songs where tag = (select tag from songs where song_id = "${req.params.songid}")`,
+    `SELECT * FROM songs WHERE tag = (SELECT tag FROM songs WHERE id = "${req.params.id}")`,
     (err, songs) => {
       if (err) {
         console.log(err);
@@ -29,7 +29,7 @@ let getRelatedTracks = function(req, res) {
 
 let getUsersLiked = function(req, res) {
   db.query(
-    `select * from users where id in (select user from song_user_likes where song = (select id from songs where song_id = "${req.params.songid}"))`,
+    `SELECT * FROM users WHERE id = (SELECT user FROM song_likes WHERE song_id = ${req.params.id})`,
     (err, users) => {
       if (err) {
         console.log(err);
@@ -43,7 +43,7 @@ let getUsersLiked = function(req, res) {
 
 let getUsersRepost = function(req, res) {
   db.query(
-    `select * from users where id in (select user from song_user_reposts where song = (select id from songs where song_id = "${req.params.songid}"))`,
+    `SELECT * FROM users WHERE id = (SELECT reposter FROM song_reposts WHERE song_id = ${req.params.id})`,
     (err, users) => {
       if (err) {
         console.log(err);
@@ -57,7 +57,7 @@ let getUsersRepost = function(req, res) {
 
 let getInclusivePlaylists = function(req, res) {
   db.query(
-    `select * from playlists where id in (select playlist from playlist_song_included where song = (select id from songs where song_id =  "${req.params.songid}"))`,
+    `SELECT * FROM playlists WHERE id = (SELECT playlist_id FROM playlist_songs where song_id = ${req.params.id})`,
     (err, playlists) => {
       if (err) {
         console.log(err);
@@ -71,7 +71,7 @@ let getInclusivePlaylists = function(req, res) {
 
 let getInclusiveAlbums = function(req, res) {
   db.query(
-    `select * from albums where id in (select album from album_song_included where song = (select id from songs where song_id = "${req.params.songid}"))`,
+    `SELECT * FROM albums WHERE id = (SELECT album FROM album_songs WHERE song_id = ${req.params.id})`,
     (err, albums) => {
       if (err) {
         console.log(err);
