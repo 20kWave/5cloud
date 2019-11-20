@@ -43,7 +43,7 @@ let getUsersLiked = function(req, res) {
 
 let getUsersRepost = function(req, res) {
   db.query(
-    `SELECT * FROM users WHERE id = (SELECT reposter FROM song_reposts WHERE song_id = ${req.params.id})`,
+    `SELECT * FROM users WHERE id = (SELECT reposter FROM song_reposts WHERE song_id = ${req.params.id} LIMI 1)LIMIT 1`,
     (err, users) => {
       if (err) {
         console.log(err);

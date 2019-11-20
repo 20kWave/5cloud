@@ -50,6 +50,12 @@ app.get('/albumincluded/songs/:id', (req, res) => {
   db.getInclusiveAlbums(req, res);
 });
 
+app.post('/add_user/:user_info', (req, res) => {
+  console.log('being hit with a POST req to add a user');
+  console.log(req)
+  // db.post
+})
+
 // app.use(
 //   '/app.js',
 //   express.static(path.join(__dirname, '../public/dist/bundle.js'))
